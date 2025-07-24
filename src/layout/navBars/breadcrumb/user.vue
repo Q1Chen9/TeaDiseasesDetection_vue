@@ -20,20 +20,20 @@
 		<div class="layout-navbars-breadcrumb-user-icon" @click="onLayoutSetingClick">
 			<i class="icon-skin iconfont" :title="$t('message.user.title3')"></i>
 		</div>
-		<!-- <div class="layout-navbars-breadcrumb-user-icon">
+		<div class="layout-navbars-breadcrumb-user-icon">
 			<el-popover placement="bottom" trigger="click" transition="el-zoom-in-top" :width="300" :persistent="false">
 				<template #reference>
-					<el-badge :is-dot="true">
+					<el-badge :is-dot="state.hasUnread">
 						<el-icon :title="$t('message.user.title4')">
 							<ele-Bell />
 						</el-icon>
 					</el-badge>
 				</template>
 				<template #default>
-					<UserNews />
+					<DetectionTasks />
 				</template>
 			</el-popover>
-		</div> -->
+		</div>
 		<div class="layout-navbars-breadcrumb-user-icon mr10" @click="onScreenfullClick">
 			<i
 				class="iconfont"
@@ -75,7 +75,7 @@ import Cookies from 'js-cookie';
 import screenfull from 'screenfull';
 import mittBus from '/@/utils/mitt';
 // 引入组件
-// const UserNews = defineAsyncComponent(() => import('/@/layout/navBars/breadcrumb/userNews.vue'));
+const DetectionTasks = defineAsyncComponent(() => import('/@/layout/navBars/breadcrumb/detectionTasks.vue'));
 const Search = defineAsyncComponent(() => import('/@/layout/navBars/breadcrumb/search.vue'));
 
 // 定义变量内容
@@ -91,6 +91,7 @@ const state = reactive({
 	isScreenfull: false,
 	disabledI18n: 'zh-cn',
 	disabledSize: 'large',
+    hasUnread: false,
 });
 
 let username: string = '';
@@ -205,6 +206,10 @@ onMounted(() => {
 		initI18nOrSize('globalComponentSize', 'disabledSize');
 		initI18nOrSize('globalI18n', 'disabledI18n');
 	}
+
+    mittBus.on('setUnreadStatus', (status) => {
+        state.hasUnread = !!status;
+    });
 });
 </script>
 

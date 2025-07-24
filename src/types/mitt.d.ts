@@ -14,15 +14,14 @@
  */
 declare type MittType<T = any> = {
 	openSetingsDrawer?: string;
-	restoreDefault?: string;
-	setSendColumnsChildren: T;
-	setSendClassicChildren: T;
 	getBreadcrumbIndexSetFilterRoutes?: string;
-	layoutMobileResize: T;
-	openOrCloseSortable?: string;
-	openShareTagsView?: string;
-	onTagsViewRefreshRouterView?: T;
-	onCurrentContextmenuClick?: T;
+	setSendClassicChildren?: T;
+	setSendClassicChildrenSuccess?: T;
+	getBreadcrumbIndexSetSendClassicChildren?: T;
+	setTagsViewNameI18n?: T;
+	closeCurrentTabs?: string;
+	updateUserInfos?: T;
+	setUnreadStatus?: boolean;
 };
 
 // mitt 参数类型定义
